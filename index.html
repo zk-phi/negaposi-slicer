@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>ネガポジスライサー</title>
+    <script src="vue-2.5.16.min.js"></script>
+    <style>canvas, img { max-width: 100%; max-height: 400px; }</style>
+  </head>
+
+  <body>
+    <div id="app">
+      <header>
+        <h1>ネガポジスライサー</h1>
+        <p>画像を明度でスライスします。アート基板のフットプリント生成などに。</p>
+      </header>
+
+      <hr />
+
+      <section>
+        <h2>元画像 <small>※巨大な画像は処理が重くなります</small></h2>
+        <p><input type="file" :disabled="status == STATUSES.LOADING" @change="onFileChange" /></p>
+        <img v-if="source.blobUrl" :src="source.blobUrl" />
+        <p v-else>画像が選択されていません</p>
+      </section>
+
+      <section>
+        <h2>スライス１ <small>右クリックで保存</small></h2>
+        <div>
+          <canvas ref="canvas1"></canvas>
+          <form>
+            <label>透明を含む: <input type="checkbox" :disabled="slice1[1] != 0" v-model="slice1[0]" /></label>
+            /
+            <label>from:</label> <input type="range" :disabled="slice1[0]" step="0.02" min="0" max="1.02" v-model="slice1[1]" /> {{ slice1[1] == 1.02 ? "MAX" : slice1[1] }}
+            /
+            <label>to:</label> <input type="range" step="0.02" min="0" max="1.02" v-model="slice1[2]" /> {{ slice1[2] == 1.02 ? "MAX" : slice1[2] }}
+          </form>
+        </div>
+      </section>
+
+      <section>
+        <h2>スライス２ <small>右クリックで保存</small></h2>
+        <div>
+          <canvas ref="canvas2"></canvas>
+          <form>
+            <label>透明を含む: <input type="checkbox" :disabled="slice2[1] != 0" v-model="slice2[0]" /></label>
+            /
+            <label>from:</label> <input type="range" :disabled="slice2[0]" step="0.02" min="0" max="1" v-model="slice2[1]" /> {{ slice2[1] == 1.02 ? "MAX" : slice2[1] }}
+            /
+            <label>to:</label> <input type="range" step="0.02" min="0" max="1.02" v-model="slice2[2]" /> {{ slice2[2] == 1.02 ? "MAX" : slice2[2] }}
+          </form>
+        </div>
+      </section>
+
+      <hr />
+
+      <footer>(C) @zk-phi</footer>
+
+    </div>
+    <script src="slicer.js"></script>
+  </body>
+</html>
