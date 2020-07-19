@@ -18,10 +18,11 @@
       <hr />
 
       <section>
-        <h2>元画像 <small>※巨大な画像は処理が重くなります</small></h2>
+        <h2>元画像</h2>
         <p><input type="file" :disabled="status == STATUSES.LOADING" @change="onFileChange" /></p>
+        <p>※ 巨大な画像は処理が重くなります</p>
+        <p>※ 画像がアップロードされることはありません</p>
         <img v-if="source.blobUrl" :src="source.blobUrl" />
-        <p v-else>画像が選択されていません</p>
       </section>
 
       <section>
