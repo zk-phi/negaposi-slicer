@@ -55,7 +55,10 @@ function renderSlice (canvas, imageData, powerArray, slice) {
     var arr = new Uint8ClampedArray(length * 4);
 
     for (var i = 0; i < length; i++) {
-        if ((slice[0] ? -1 : slice[1]) <= powerArray[i] && powerArray[i] < slice[2]) {
+        var satisfied = slice.some(function (range) {
+            return (range[0] ? -1 : range[1]) <= powerArray[i] && powerArray[i] < range[2];
+        });
+        if (satisfied) {
             arr[i * 4 + 3] = 255;
         } else {
             arr[i * 4 + 0] = arr[i * 4 + 1] = arr[i * 4 + 2] = arr[i * 4 + 3] = 255;
@@ -80,8 +83,8 @@ var vm = new Vue({
             blobUrl: "",
             powerArray: null
         },
-        slice1: [false, 0, 1.02],
-        slice2: [false, 0, 1.02]
+        slice1: [[false, 0, 1.02]],
+        slice2: [[false, 0, 1.02]]
     },
     watch: {
         slice1: {
@@ -110,8 +113,20 @@ var vm = new Vue({
         refreshSlice1: function (ix) {
             renderSlice(vm.$refs.canvas1, vm.source.imageData, vm.source.powerArray, vm.slice1);
         },
+        addRange1: function () {
+            vm.slice1.push([false, 0, 1.02]);
+        },
+        deleteRange1: function (ix) {
+            vm.slice1.splice(ix, 1);
+        },
         refreshSlice2: function (ix) {
             renderSlice(vm.$refs.canvas2, vm.source.imageData, vm.source.powerArray, vm.slice2);
+        },
+        addRange2: function (ix) {
+            vm.slice2.push([false, 0, 1.02]);
+        },
+        deleteRange2: function (ix) {
+            vm.slice2.splice(ix, 1);
         }
     },
 });

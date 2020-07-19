@@ -27,30 +27,30 @@
 
       <section>
         <h2>スライス１ <small>右クリックで保存</small></h2>
-        <div>
-          <canvas ref="canvas1"></canvas>
-          <form>
-            <label>透明を含む: <input type="checkbox" :disabled="slice1[1] != 0" v-model="slice1[0]" /></label>
-            /
-            <label>from:</label> <input type="range" :disabled="slice1[0]" step="0.02" min="0" max="1.02" v-model="slice1[1]" /> {{ slice1[1] == 1.02 ? "MAX" : slice1[1] }}
-            /
-            <label>to:</label> <input type="range" step="0.02" min="0" max="1.02" v-model="slice1[2]" /> {{ slice1[2] == 1.02 ? "MAX" : slice1[2] }}
-          </form>
+        <canvas ref="canvas1"></canvas>
+        <div v-for="(range, ix) in slice1">
+          <button v-if="ix > 0" @click="deleteRange1(ix)">x</button>
+          <label>透明を含む: <input type="checkbox" :disabled="range[1] != 0" v-model="range[0]" /></label>
+          /
+          <label>from:</label> <input type="range" :disabled="range[0]" step="0.02" min="0" max="1.02" v-model="range[1]" /> {{ range[1] == 1.02 ? "MAX" : range[1] }}
+          /
+          <label>to:</label> <input type="range" step="0.02" min="0" max="1.02" v-model="range[2]" /> {{ range[2] == 1.02 ? "MAX" : range[2] }}
         </div>
+        <button @click="addRange1">+ 範囲を追加</button>
       </section>
 
       <section>
         <h2>スライス２ <small>右クリックで保存</small></h2>
-        <div>
-          <canvas ref="canvas2"></canvas>
-          <form>
-            <label>透明を含む: <input type="checkbox" :disabled="slice2[1] != 0" v-model="slice2[0]" /></label>
-            /
-            <label>from:</label> <input type="range" :disabled="slice2[0]" step="0.02" min="0" max="1" v-model="slice2[1]" /> {{ slice2[1] == 1.02 ? "MAX" : slice2[1] }}
-            /
-            <label>to:</label> <input type="range" step="0.02" min="0" max="1.02" v-model="slice2[2]" /> {{ slice2[2] == 1.02 ? "MAX" : slice2[2] }}
-          </form>
+        <canvas ref="canvas2"></canvas>
+        <div v-for="(range, ix) in slice2">
+          <button v-if="ix > 0" @click="deleteRange2(ix)">x</button>
+          <label>透明を含む: <input type="checkbox" :disabled="range[1] != 0" v-model="range[0]" /></label>
+          /
+          <label>from:</label> <input type="range" :disabled="range[0]" step="0.02" min="0" max="1" v-model="range[1]" /> {{ range[1] == 1.02 ? "MAX" : range[1] }}
+          /
+          <label>to:</label> <input type="range" step="0.02" min="0" max="1.02" v-model="range[2]" /> {{ range[2] == 1.02 ? "MAX" : range[2] }}
         </div>
+        <button @click="addRange2">+ 範囲を追加</button>
       </section>
 
       <hr />
