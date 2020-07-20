@@ -77,7 +77,7 @@ function renderBaseImage (canvas, imageData, powerArray) {
 
     for (var i = 0; i < length; i++) {
         if (powerArray[i] >= 0) {
-            arr[i * 4 + 0] = arr[i * 4 + 1] = arr[i * 4 + 2] = (1 - powerArray[i]) * 255;
+            arr[i * 4 + 0] = arr[i * 4 + 1] = arr[i * 4 + 2] = powerArray[i] * 255;
             arr[i * 4 + 3] = 255;
         }
     }
