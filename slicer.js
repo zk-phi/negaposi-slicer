@@ -110,7 +110,7 @@ var vm = new Vue({
                 });
             });
         },
-        refreshSlice1: function (ix) {
+        refreshSlice1: function () {
             renderSlice(vm.$refs.canvas1, vm.source.imageData, vm.source.powerArray, vm.slice1);
         },
         addRange1: function () {
@@ -119,10 +119,10 @@ var vm = new Vue({
         deleteRange1: function (ix) {
             vm.slice1.splice(ix, 1);
         },
-        refreshSlice2: function (ix) {
+        refreshSlice2: function () {
             renderSlice(vm.$refs.canvas2, vm.source.imageData, vm.source.powerArray, vm.slice2);
         },
-        addRange2: function (ix) {
+        addRange2: function () {
             vm.slice2.push([false, 0, 1.02]);
         },
         deleteRange2: function (ix) {
