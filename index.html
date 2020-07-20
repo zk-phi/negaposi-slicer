@@ -26,6 +26,20 @@
       </section>
 
       <section>
+        <h2>モノクロ画像</h2>
+        <canvas ref="canvasBase"></canvas>
+        <div>
+          基準色
+          <label>R:</label> <input type="range" step="1" min="0" max="255" v-model="baseColor[0]" />
+          {{ baseColor[0] }}
+          <label>G:</label> <input type="range" step="1" min="0" max="255" v-model="baseColor[1]" />
+          {{ baseColor[1] }}
+          <label>B:</label> <input type="range" step="1" min="0" max="255" v-model="baseColor[2]" />
+          {{ baseColor[2] }}
+        </div>
+      </section>
+
+      <section>
         <h2>スライス１ <small>右クリックで保存</small></h2>
         <canvas ref="canvas1"></canvas>
         <div v-for="(range, ix) in slice1">
