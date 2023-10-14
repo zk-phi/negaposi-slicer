@@ -12,8 +12,8 @@ function generateImageData (blobUrl, callback) {
     var image = document.createElement("img");
     image.onload = function () {
         var canvas = document.createElement("canvas");
-        canvas.width  = image.naturalWidth;
-        canvas.height = image.naturalHeight;
+        canvas.width  = image.width;
+        canvas.height = image.height;
 
         var ctx = canvas.getContext('2d');
         ctx.drawImage(image, 0, 0);
@@ -65,7 +65,7 @@ function renderSlice (canvas, imageData, powerArray, slice) {
         }
     }
 
-    canvas.getContext("2d").putImageData(new ImageData(arr, imageData.height, imageData.width), 0, 0);
+    canvas.getContext("2d").putImageData(new ImageData(arr, imageData.width, imageData.height), 0, 0);
 }
 
 function renderBaseImage (canvas, imageData, powerArray) {
@@ -82,7 +82,7 @@ function renderBaseImage (canvas, imageData, powerArray) {
         }
     }
 
-    canvas.getContext("2d").putImageData(new ImageData(arr, imageData.height, imageData.width), 0, 0);
+    canvas.getContext("2d").putImageData(new ImageData(arr, imageData.width, imageData.height), 0, 0);
 }
 
 /* ---- main */
